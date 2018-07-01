@@ -8,4 +8,4 @@ import netlifyIdentity from 'netlify-identity-widget'
 netlifyIdentity.init()
 
 ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+// registerServiceWorker();
