@@ -92,6 +92,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^4.5.2",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.3"
   }
