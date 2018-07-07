@@ -6,11 +6,10 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import auth from '../auth/reducer';
-import authMiddleware from '../auth/middleware';
 import routes from '../routes';
 
 
-export default (router, netlifyIdentity) => {
+export default (router) => {
   const { reducer, middleware, enhancer } = router({
     routes,
   });
@@ -24,10 +23,7 @@ export default (router, netlifyIdentity) => {
       enhancer,
       applyMiddleware(
         middleware,
-        authMiddleware(netlifyIdentity),
-        thunk.withExtraArgument({
-          netlifyIdentity,
-        }),
+        thunk.withExtraArgument({}),
       ),
     ),
   );
