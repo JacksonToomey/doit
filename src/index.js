@@ -36,11 +36,18 @@ if (user) {
 } else {
   netlifyIdentity.on('login', async (usr) => {
     netlifyIdentity.close();
-    const jwt = usr.jwt();
-    await api.post('/', {
-      token: jwt,
-    });
-    window.location.reload();
+    const jwt = await usr.jwt();
+    try {
+      await api.post('/auth/login', {
+        token: jwt,
+      });
+      window.location.reload();
+    } catch (error) {
+      netlifyIdentity.logout();
+      // eslint-disable-next-line no-alert
+      await alert('Error logging in');
+      window.location.reload();
+    }
   });
   netlifyIdentity.open();
 }
