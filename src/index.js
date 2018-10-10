@@ -5,25 +5,23 @@ import { Provider } from 'react-redux';
 import { initializeCurrentLocation } from 'redux-little-router';
 import netlifyIdentity from 'netlify-identity-widget';
 import createStore from './store';
-
+import App from './App/Container';
+import actions from './user/actions';
 
 import './main.scss';
 
 netlifyIdentity.init();
 
-const Comp = ({ email }) => (
-  <div>{email}</div>
-);
-
-const load = (user) => {
+const load = (u) => {
   const store = createStore();
   const initialLocation = store.getState().router;
   if (initialLocation) {
     store.dispatch(initializeCurrentLocation(initialLocation));
   }
+  store.dispatch(actions.creators.setUser(u));
   render(
     <Provider store={store}>
-      <Comp email={user.email} />
+      <App />
     </Provider>,
     document.getElementById('app'),
   );
