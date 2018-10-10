@@ -10,7 +10,7 @@ module.exports = {
     vendor: ['react', 'react-dom']
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
     filename: '[name].js',
     chunkFilename: '[name].js',
   },
