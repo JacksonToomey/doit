@@ -1,4 +1,4 @@
 import { connect } from 'react-redux';
-import Component from 'App/Component';
+import Component from 'Upcoming/Component';
 
 export default connect()(Component);

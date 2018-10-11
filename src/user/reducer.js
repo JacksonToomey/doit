@@ -1,7 +1,7 @@
 import { Record } from 'immutable';
 import { createReducer } from 'reduxsauce';
-import actions from './actions';
-import models from './models';
+import actions from 'user/actions';
+import models from 'user/models';
 
 const State = Record({
   user: null,

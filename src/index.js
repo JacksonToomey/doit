@@ -4,9 +4,11 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { initializeCurrentLocation } from 'redux-little-router';
 import netlifyIdentity from 'netlify-identity-widget';
-import createStore from './store';
-import App from './App/Container';
-import actions from './user/actions';
+import App from 'App/Container';
+import actions from 'user/actions';
+import createStore from 'store';
+
+import 'react-md/dist/react-md.amber-blue.min.css';
 
 import './main.scss';
 
@@ -19,6 +21,7 @@ const load = (u) => {
     store.dispatch(initializeCurrentLocation(initialLocation));
   }
   store.dispatch(actions.creators.setUser(u));
+
   render(
     <Provider store={store}>
       <App />
