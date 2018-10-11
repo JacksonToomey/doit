@@ -29,7 +29,9 @@ const NavBarComponent = ({
       },
     ]}
   >
-    {children}
+    <div className="app-container">
+      {children}
+    </div>
   </NavigationDrawer>
 );
 

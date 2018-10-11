@@ -11,7 +11,8 @@ class Component extends React.Component {
   static propTypes = {
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+  }
 
   render() {
     return (

@@ -1,8 +1,13 @@
 import React from 'react';
+import { Card, CardText } from 'react-md';
 
 const Component = () => (
   <div>
-Upcoming
+    <Card>
+      <CardText>
+        Test
+      </CardText>
+    </Card>
   </div>
 );
 

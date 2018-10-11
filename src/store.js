@@ -7,8 +7,7 @@ import routes from 'router/routes';
 
 
 export default () => {
-  const { reducer, middleware, enhancer } = routerForBrowser({ routes, basename: '/' });
-  console.log(enhancer);
+  const { reducer, middleware, enhancer } = routerForBrowser({ routes });
   const store = createStore(
     combineReducers({
       router: reducer,
