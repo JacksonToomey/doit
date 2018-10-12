@@ -2,5 +2,7 @@
     .app-container {
         padding-top: 20px;
         padding-left: 20px;
+
+        @import './NewChoreButton/NewChoreButton.scss';
     }
 }

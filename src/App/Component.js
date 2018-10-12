@@ -4,6 +4,7 @@ import NavBarContainer from 'App/NavBarContainer';
 import Upcoming from 'Upcoming/Container';
 import Chores from 'Chores/Container';
 import EditChore from 'EditChore/Container';
+import NewChoreButton from 'NewChoreButton/Container';
 import NotFound from 'NotFound';
 
 
@@ -34,6 +35,7 @@ class Component extends React.Component {
             <Fragment forNoMatch>
               <NotFound />
             </Fragment>
+            <NewChoreButton />
           </div>
         </Fragment>
       </NavBarContainer>
