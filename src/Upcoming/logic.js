@@ -26,6 +26,14 @@ const completeChoreLogic = createLogic({
   process: async ({ action, api }, dispatch, done) => {
     const { choreId } = action;
     await api.post(`/api/upcoming/${choreId}`);
+    const { data } = await api.get('/api/upcoming');
+    const upcomingChores = new List(data.map(upcoming => new models.UpcomingChore({
+      id: upcoming.id,
+      name: upcoming.name,
+      details: upcoming.details,
+      dueDate: new Date(upcoming.dueDate),
+    })));
+    await dispatch(actions.creators.setUpcomingChores(upcomingChores));
     await dispatch(notificationActions.creators.addNotification('Did it!'));
     done(action);
   },
