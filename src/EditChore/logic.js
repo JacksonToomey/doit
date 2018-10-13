@@ -4,7 +4,7 @@ import routerSelectors from 'router/selectors';
 
 const fetchChoreLogic = createLogic({
   type: actions.types.FETCH_CHORE,
-  process: async ({ getState, api }, dispatch, done) => {
+  process: async ({ getState }, dispatch, done) => {
     const state = getState();
     const params = routerSelectors.getParams(state);
     if (params.choreId) {
