@@ -3,6 +3,7 @@ import {
 } from 'redux';
 import { routerForBrowser } from 'redux-little-router';
 import user from 'user/reducer';
+import upcoming from 'Upcoming/reducer';
 import routes from 'router/routes';
 
 
@@ -12,6 +13,7 @@ export default () => {
     combineReducers({
       router: reducer,
       user,
+      upcoming,
     }),
     {},
     compose(enhancer, applyMiddleware(middleware)),
