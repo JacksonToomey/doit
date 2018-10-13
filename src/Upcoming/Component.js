@@ -17,13 +17,16 @@ class Component extends React.Component {
 
   render() {
     const { upcomingChores, onChoreComplete } = this.props;
-    const chores = upcomingChores.map(chore => (
-      <UpcomingChoreComponent
-        key={chore.id}
-        chore={chore}
-        onComplete={onChoreComplete}
-      />
-    ));
+    let chores = <div>No Chores</div>;
+    if (upcomingChores.size > 0) {
+      chores = upcomingChores.map(chore => (
+        <UpcomingChoreComponent
+          key={chore.id}
+          chore={chore}
+          onComplete={onChoreComplete}
+        />
+      ));
+    }
     return (
       <div className="upcoming-chores">
         {chores}
