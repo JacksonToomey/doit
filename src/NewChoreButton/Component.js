@@ -14,6 +14,7 @@ const Component = ({
     <Button
       className="new-chore-button"
       floating
+      secondary
       onClick={onClick}
     >
     add

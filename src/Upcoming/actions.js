@@ -1,9 +1,10 @@
 import { createActions } from 'reduxsauce';
 
-const setUpcomingChores = ['upcomingChores'];
 
 const { Types, Creators } = createActions({
-  setUpcomingChores,
+  setUpcomingChores: ['upcomingChores'],
+  completeChore: ['choreId'],
+  fetchChores: null,
 }, { prefix: '@UPCOMING_/' });
 
 export default {

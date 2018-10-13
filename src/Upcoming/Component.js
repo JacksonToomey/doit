@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { List } from 'immutable';
-import { Card, CardText } from 'react-md';
+import UpcomingChoreComponent from 'Upcoming/UpcomingChoreComponent';
 
 class Component extends React.Component {
   static propTypes = {
     upcomingChores: PropTypes.instanceOf(List).isRequired,
     init: PropTypes.func.isRequired,
+    onChoreComplete: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -15,15 +16,17 @@ class Component extends React.Component {
   }
 
   render() {
-    const { upcomingChores } = this.props;
-    console.log(upcomingChores.toJS());
+    const { upcomingChores, onChoreComplete } = this.props;
+    const chores = upcomingChores.map(chore => (
+      <UpcomingChoreComponent
+        key={chore.id}
+        chore={chore}
+        onComplete={onChoreComplete}
+      />
+    ));
     return (
-      <div>
-        <Card>
-          <CardText>
-            Test
-          </CardText>
-        </Card>
+      <div className="upcoming-chores">
+        {chores}
       </div>
     );
   }

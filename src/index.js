@@ -8,7 +8,7 @@ import App from 'App/Container';
 import actions from 'user/actions';
 import createStore from 'store';
 
-import 'react-md/dist/react-md.amber-blue.min.css';
+import 'react-md/dist/react-md.blue_grey-indigo.min.css';
 
 import './main.scss';
 

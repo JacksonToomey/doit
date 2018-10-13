@@ -7,7 +7,23 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   entry: {
     main: './src/index.js',
-    vendor: ['react', 'react-dom']
+    vendor: [
+      'react',
+      'react-dom',
+      'redux',
+      'reselect',
+      'axios',
+      '@babel/polyfill',
+      'gravatar',
+      'immutable',
+      'material-design-icons',
+      'netlify-identity-widget',
+      'prop-types',
+      'react-redux',
+      'redux-little-router',
+      'redux-logic',
+      'reduxsauce',
+    ]
   },
   output: {
     path: path.resolve(__dirname, 'public'),
