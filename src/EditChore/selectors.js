@@ -8,7 +8,23 @@ const getShowBackButton = createSelector(
   previous => previous !== undefined,
 );
 
+const getFrequencySelect = createSelector(
+  [getChore],
+  (chore) => {
+    if (chore.frequencyType === '') {
+      return '';
+    }
+
+    if (chore.frequencyAmount !== 1) {
+      return 'custom';
+    }
+
+    return chore.frequencyType;
+  },
+);
+
 export default {
   getShowBackButton,
   getChore,
+  getFrequencySelect,
 };

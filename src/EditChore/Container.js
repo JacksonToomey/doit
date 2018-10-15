@@ -7,6 +7,7 @@ import actions from 'EditChore/actions';
 const mapStateToProps = state => ({
   showBack: selectors.getShowBackButton(state),
   chore: selectors.getChore(state),
+  frequencySelect: selectors.getFrequencySelect(state),
 });
 
 const mapDispatchToProps = dispatch => ({

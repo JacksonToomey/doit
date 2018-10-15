@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {
   Button,
   TextField,
-  // SelectField,
+  SelectField,
+  DatePicker,
 } from 'react-md';
 import models from 'common/models';
 
@@ -14,11 +15,13 @@ class Component extends React.Component {
     init: PropTypes.func.isRequired,
     chore: PropTypes.instanceOf(models.Chore).isRequired,
     changeValue: PropTypes.func.isRequired,
+    frequencySelect: PropTypes.string,
     showBack: PropTypes.bool,
   };
 
   static defaultProps = {
     showBack: false,
+    frequencySelect: '',
   };
 
   componentDidMount() {
@@ -28,7 +31,11 @@ class Component extends React.Component {
 
   render() {
     const {
-      showBack, goBack, chore, changeValue,
+      showBack,
+      goBack,
+      chore,
+      changeValue,
+      frequencySelect,
     } = this.props;
     const backButton = showBack ? (
       <Button
@@ -59,22 +66,97 @@ class Component extends React.Component {
             maxRows={0}
             rows={3}
           />
-          {/* <SelectField
+        </div>
+        <div>
+          <SelectField
             id="chore-frequency-select"
             placeholder="Frequency"
             className="md-cell"
+            label="Frequency"
+            value={frequencySelect}
+            onChange={(frequency) => {
+              if (frequency === 'custom') {
+                changeValue('frequencyType', 'days');
+                changeValue('frequencyAmount', 3);
+                return;
+              }
+
+              changeValue('frequencyType', frequency);
+              changeValue('frequencyAmount', 1);
+            }}
             menuItems={[
-              'Daily',
-              'Weekly',
-              'Monthly',
-              'Yearly',
-              'Custom',
+              {
+                label: 'Daily',
+                value: 'days',
+              },
+              {
+                label: 'Weekly',
+                value: 'weeks',
+              },
+              {
+                label: 'Monthly',
+                value: 'months',
+              },
+              {
+                label: 'Yearly',
+                value: 'years',
+              },
+              {
+                label: 'Custom',
+                value: 'custom',
+              },
             ]}
-          /> */}
+          />
+          {frequencySelect === 'custom' ? (
+            <span>
+              <TextField
+                type="number"
+                id="frequency-amount-input"
+                label="Frequency"
+                fullWidth={false}
+                value={chore.frequencyAmount}
+                onChange={(value) => { changeValue('frequencyAmount', value); }}
+              />
+              <SelectField
+                id="frequency-type-select"
+                value={chore.frequencyType}
+                onChange={(value) => { changeValue('frequencyType', value); }}
+                menuItems={[
+                  {
+                    label: 'Days',
+                    value: 'days',
+                  },
+                  {
+                    label: 'Weeks',
+                    value: 'weeks',
+                  },
+                  {
+                    label: 'Months',
+                    value: 'months',
+                  },
+                  {
+                    label: 'Years',
+                    value: 'years',
+                  },
+                ]}
+              />
+            </span>
+          ) : null}
+        </div>
+        <div>
+          <DatePicker
+            id="start-date-picker"
+            value={chore.startDate}
+            onChange={(dateString, dateObject) => {
+              changeValue('startDate', dateObject);
+            }}
+          />
+        </div>
+        <div>
           <Button
             raised
           >
-            Save
+              Save
           </Button>
         </div>
       </div>

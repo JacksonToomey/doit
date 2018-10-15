@@ -37,19 +37,21 @@ const load = (u) => {
   );
 };
 
-const user = netlifyIdentity.currentUser();
-if (user) {
-  netlifyIdentity.close();
-  const { token } = user;
-  api.post('/login', { token: token.access_token }).then(() => {
+const bootstrap = async () => {
+  const user = netlifyIdentity.currentUser();
+  if (user) {
+    const token = await user.jwt();
+    await api.post('/login', { token });
     load(user);
-  });
-} else {
-  netlifyIdentity.on('login', async (u) => {
-    netlifyIdentity.close();
-    const { token } = u;
-    await api.post('/login', { token: token.access_token });
-    load(u);
-  });
-  netlifyIdentity.open();
-}
+  } else {
+    netlifyIdentity.on('login', async (u) => {
+      netlifyIdentity.close();
+      const { token } = u;
+      await api.post('/login', { token: token.access_token });
+      load(u);
+    });
+    netlifyIdentity.open();
+  }
+};
+
+bootstrap().then(() => {});
