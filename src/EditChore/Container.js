@@ -14,6 +14,7 @@ const mapDispatchToProps = dispatch => ({
   goBack: () => { dispatch(goBack()); },
   init: () => { dispatch(actions.creators.fetchChore()); },
   changeValue: (field, value) => { dispatch(actions.creators.setChoreValue(field, value)); },
+  persistChore: () => { dispatch(actions.creators.persistChore()); },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

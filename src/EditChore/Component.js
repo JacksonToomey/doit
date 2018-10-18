@@ -15,6 +15,7 @@ class Component extends React.Component {
     init: PropTypes.func.isRequired,
     chore: PropTypes.instanceOf(models.Chore).isRequired,
     changeValue: PropTypes.func.isRequired,
+    persistChore: PropTypes.func.isRequired,
     frequencySelect: PropTypes.string,
     showBack: PropTypes.bool,
   };
@@ -36,6 +37,7 @@ class Component extends React.Component {
       chore,
       changeValue,
       frequencySelect,
+      persistChore,
     } = this.props;
     const backButton = showBack ? (
       <Button
@@ -155,6 +157,7 @@ class Component extends React.Component {
         <div>
           <Button
             raised
+            onClick={persistChore}
           >
               Save
           </Button>
