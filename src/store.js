@@ -10,6 +10,8 @@ import upcoming from 'Upcoming/reducer';
 import upcomingLogic from 'Upcoming/logic';
 import editChore from 'EditChore/reducer';
 import editChoreLogic from 'EditChore/logic';
+import chores from 'Chores/reducer';
+import choresLogic from 'Chores/logic';
 import notifications from 'Notifications/reducer';
 import commonLogic from 'common/logic';
 import routes from 'router/routes';
@@ -21,6 +23,7 @@ export default () => {
     ...upcomingLogic,
     ...editChoreLogic,
     ...commonLogic,
+    ...choresLogic,
   ], { api });
   const store = createStore(
     combineReducers({
@@ -29,6 +32,7 @@ export default () => {
       upcoming,
       notifications,
       editChore,
+      chores,
     }),
     {},
     compose(enhancer, applyMiddleware(middleware, logicMiddleware, createLogger({
