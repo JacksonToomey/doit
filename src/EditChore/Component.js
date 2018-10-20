@@ -160,19 +160,21 @@ class Component extends React.Component {
           ) : null}
         </Grid>
 
-        <Grid>
-          <Cell size={4}>
-            <DatePicker
-              id="start-date-picker"
-              value={chore.startDate}
-              icon={null}
-              label="Start Date"
-              onChange={(dateString, dateObject) => {
-                changeValue('startDate', dateObject);
-              }}
-            />
-          </Cell>
-        </Grid>
+        {chore.id === '' ? (
+          <Grid>
+            <Cell size={4}>
+              <DatePicker
+                id="start-date-picker"
+                value={chore.startDate}
+                icon={null}
+                label="Start Date"
+                onChange={(dateString, dateObject) => {
+                  changeValue('startDate', dateObject);
+                }}
+              />
+            </Cell>
+          </Grid>
+        ) : null}
         <div>
           <Button
             raised

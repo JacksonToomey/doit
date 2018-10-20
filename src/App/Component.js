@@ -27,9 +27,6 @@ class Component extends React.Component {
             <Fragment forRoute="/chores">
               <Chores />
             </Fragment>
-            <Fragment forRoute="/chore/:choreId">
-              <EditChore />
-            </Fragment>
             <Fragment forRoute="/chore">
               <EditChore />
             </Fragment>

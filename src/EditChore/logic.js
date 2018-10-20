@@ -8,12 +8,24 @@ import models from 'common/models';
 
 const fetchChoreLogic = createLogic({
   type: actions.types.FETCH_CHORE,
-  process: async ({ getState }, dispatch, done) => {
+  process: async ({ getState, api }, dispatch, done) => {
     const state = getState();
     const params = routerSelectors.getParams(state);
     if (params.choreId) {
       // Get Chore
-      done();
+      const { choreId } = params;
+      try {
+        const { data } = await api.get(`/api/chores/${choreId}`);
+        dispatch(actions.creators.setChore(new models.Chore(data)));
+        done();
+      } catch (err) {
+        if (err.response.status === 404) {
+          await dispatch(push('/NotFound'));
+          done();
+        } else {
+          throw err;
+        }
+      }
       return;
     }
     dispatch(actions.creators.setChore(new models.Chore()));
@@ -28,8 +40,7 @@ const persistChoreLogic = createLogic({
     const state = getState();
     const chore = selectors.getChore(state);
     try {
-      const resp = await api.post('/api/chores', chore);
-      console.log(resp);
+      await api.post('/api/chores', chore);
     } catch (err) {
       dispatch(commonActions.creators.apiError(err));
       return;
