@@ -5,6 +5,8 @@ import {
   TextField,
   SelectField,
   DatePicker,
+  Grid,
+  Cell,
 } from 'react-md';
 import models from 'common/models';
 
@@ -53,107 +55,124 @@ class Component extends React.Component {
     return (
       <div className="edit-chore">
         {backButton}
-        <div>
-          <TextField
-            id="chore-name"
-            label="Name"
-            value={chore.name}
-            onChange={(value) => { changeValue('name', value); }}
-          />
-          <TextField
-            id="chore-details"
-            label="Details"
-            value={chore.details}
-            onChange={(value) => { changeValue('details', value); }}
-            maxRows={0}
-            rows={3}
-          />
-        </div>
-        <div>
-          <SelectField
-            id="chore-frequency-select"
-            placeholder="Frequency"
-            className="md-cell"
-            label="Frequency"
-            value={frequencySelect}
-            onChange={(frequency) => {
-              if (frequency === 'custom') {
-                changeValue('frequencyType', 'days');
-                changeValue('frequencyAmount', 3);
-                return;
-              }
+        <Grid>
+          <Cell size={12}>
+            <TextField
+              id="chore-name"
+              label="Name"
+              value={chore.name}
+              onChange={(value) => { changeValue('name', value); }}
+            />
+          </Cell>
+          <Cell size={12}>
+            <TextField
+              id="chore-details"
+              label="Details"
+              value={chore.details}
+              onChange={(value) => { changeValue('details', value); }}
+              maxRows={0}
+              rows={3}
+            />
+          </Cell>
+        </Grid>
+        <Grid>
+          <Cell size={4}>
+            <SelectField
+              id="chore-frequency-select"
+              placeholder="Frequency"
+              label="Frequency"
+              fullWidth
+              value={frequencySelect}
+              onChange={(frequency) => {
+                if (frequency === 'custom') {
+                  changeValue('frequencyType', 'days');
+                  changeValue('frequencyAmount', 3);
+                  return;
+                }
 
-              changeValue('frequencyType', frequency);
-              changeValue('frequencyAmount', 1);
-            }}
-            menuItems={[
-              {
-                label: 'Daily',
-                value: 'days',
-              },
-              {
-                label: 'Weekly',
-                value: 'weeks',
-              },
-              {
-                label: 'Monthly',
-                value: 'months',
-              },
-              {
-                label: 'Yearly',
-                value: 'years',
-              },
-              {
-                label: 'Custom',
-                value: 'custom',
-              },
-            ]}
-          />
+                changeValue('frequencyType', frequency);
+                changeValue('frequencyAmount', 1);
+              }}
+              menuItems={[
+                {
+                  label: 'Daily',
+                  value: 'days',
+                },
+                {
+                  label: 'Weekly',
+                  value: 'weeks',
+                },
+                {
+                  label: 'Monthly',
+                  value: 'months',
+                },
+                {
+                  label: 'Yearly',
+                  value: 'years',
+                },
+                {
+                  label: 'Custom',
+                  value: 'custom',
+                },
+              ]}
+            />
+          </Cell>
           {frequencySelect === 'custom' ? (
-            <span>
-              <TextField
-                type="number"
-                id="frequency-amount-input"
-                label="Frequency"
-                fullWidth={false}
-                value={chore.frequencyAmount}
-                onChange={(value) => { changeValue('frequencyAmount', value); }}
-              />
-              <SelectField
-                id="frequency-type-select"
-                value={chore.frequencyType}
-                onChange={(value) => { changeValue('frequencyType', value); }}
-                menuItems={[
-                  {
-                    label: 'Days',
-                    value: 'days',
-                  },
-                  {
-                    label: 'Weeks',
-                    value: 'weeks',
-                  },
-                  {
-                    label: 'Months',
-                    value: 'months',
-                  },
-                  {
-                    label: 'Years',
-                    value: 'years',
-                  },
-                ]}
-              />
-            </span>
+            <React.Fragment>
+              <Cell size={4}>
+                <TextField
+                  type="number"
+                  id="frequency-amount-input"
+                  label="Frequency amount"
+                  fullWidth
+                  value={chore.frequencyAmount}
+                  onChange={(value) => { changeValue('frequencyAmount', value); }}
+                />
+              </Cell>
+              <Cell size={4}>
+                <SelectField
+                  id="frequency-type-select"
+                  value={chore.frequencyType}
+                  label="Frequency type"
+                  fullWidth
+                  onChange={(value) => { changeValue('frequencyType', value); }}
+                  menuItems={[
+                    {
+                      label: 'Days',
+                      value: 'days',
+                    },
+                    {
+                      label: 'Weeks',
+                      value: 'weeks',
+                    },
+                    {
+                      label: 'Months',
+                      value: 'months',
+                    },
+                    {
+                      label: 'Years',
+                      value: 'years',
+                    },
+                  ]}
+                />
+              </Cell>
+            </React.Fragment>
           ) : null}
-        </div>
-        <div>
-          <DatePicker
-            id="start-date-picker"
-            value={chore.startDate}
-            onChange={(dateString, dateObject) => {
-              changeValue('startDate', dateObject);
-            }}
-          />
-        </div>
+        </Grid>
+
+        <Grid>
+          <Cell size={4}>
+            <DatePicker
+              id="start-date-picker"
+              value={chore.startDate}
+              icon={null}
+              label="Start Date"
+              onChange={(dateString, dateObject) => {
+                changeValue('startDate', dateObject);
+              }}
+            />
+          </Cell>
+        </Grid>
         <div>
           <Button
             raised

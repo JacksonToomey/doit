@@ -3,7 +3,7 @@ import {
 } from 'redux';
 import { routerForBrowser } from 'redux-little-router';
 import { createLogicMiddleware } from 'redux-logic';
-import logger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import api from 'api';
 import user from 'user/reducer';
 import upcoming from 'Upcoming/reducer';
@@ -31,7 +31,19 @@ export default () => {
       editChore,
     }),
     {},
-    compose(enhancer, applyMiddleware(middleware, logicMiddleware, logger)),
+    compose(enhancer, applyMiddleware(middleware, logicMiddleware, createLogger({
+      stateTransformer: (state) => {
+        const transformedState = {};
+        Object.keys(state).forEach((key) => {
+          if (key === 'router') {
+            transformedState[key] = state[key];
+          } else {
+            transformedState[key] = state[key].toJS();
+          }
+        });
+        return transformedState;
+      },
+    }))),
   );
   return store;
 };
