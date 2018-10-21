@@ -41,13 +41,17 @@ const bootstrap = async () => {
   const user = netlifyIdentity.currentUser();
   if (user) {
     const token = await user.jwt();
-    await api.post('/login', { token });
+    const { data } = await api.post('/login', { token });
+    api.setUser(user);
+    api.setToken(data.token);
     load(user);
   } else {
     netlifyIdentity.on('login', async (u) => {
       netlifyIdentity.close();
       const { token } = u;
-      await api.post('/login', { token: token.access_token });
+      const { data } = await api.post('/login', { token: token.access_token });
+      api.setUser(u);
+      api.setToken(data.token);
       load(u);
     });
     netlifyIdentity.open();
