@@ -1,41 +1,45 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Fragment } from 'redux-little-router';
-import './App.scss';
+import NavBarContainer from 'App/NavBarContainer';
+import Upcoming from 'Upcoming/Container';
+import Chores from 'Chores/Container';
+import EditChore from 'EditChore/Container';
+import NewChoreButton from 'NewChoreButton/Container';
+import Notifications from 'Notifications/Container';
+import NotFound from 'NotFound';
 
-class App extends Component {
-  componentDidMount() {}
+
+class Component extends React.Component {
+  static propTypes = {
+  };
+
+  componentDidMount() {
+  }
 
   render() {
     return (
-      <div className="App">
+      <NavBarContainer>
         <Fragment forRoute="/">
           <div>
             <Fragment forRoute="/">
-              <span>
-                Main Page
-              </span>
+              <Upcoming />
             </Fragment>
-            <Fragment forRoute="/Foo">
-              <span>
-                Foo
-              </span>
+            <Fragment forRoute="/chores">
+              <Chores />
             </Fragment>
-            <Fragment forRoute="/login">
-              <span>
-                Logging In
-              </span>
+            <Fragment forRoute="/chore">
+              <EditChore />
             </Fragment>
             <Fragment forNoMatch>
-              <span>
-                Not Found
-              </span>
+              <NotFound />
             </Fragment>
-
+            <NewChoreButton />
+            <Notifications />
           </div>
         </Fragment>
-      </div>
+      </NavBarContainer>
     );
   }
 }
 
-export default App;
+export default Component;
